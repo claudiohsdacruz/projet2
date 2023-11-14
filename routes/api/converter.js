@@ -1,4 +1,5 @@
 const express = require("express");
+const { listeners } = require("process");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -18,6 +19,24 @@ router.post("/", async (req, res) => {
         console.log(`Received data: ${value} feet. Converted to ${meters} meter.`);
         // Send the converted value in the response
         res.send(`Converted value: ${meters} meters.`);
+    } else if (type.toLowerCase() === "meter2feet" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from meter to feet (1 meter = 3,28084 meters)
+        const feet = parseFloat(value) * 3.28084;
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} meter. Converted to ${feet} feet.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${feet} feet.`);
+    } else if (type.toLowerCase() === "livre2kg" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from livres to kg (1 livre = 0,453592 livre)
+        const kg = (parseFloat(value) * 0.453592).toFixed(3);
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} livres. Converted to ${kg} kilogrammes.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${kg} kilogrames.`);
     } else if (type.toLowerCase() === "kg2livre" && !isNaN(value)) {
         // log to server console for debugging
         console.log("received data: " + req.body.type + " for " + req.body.value);
@@ -27,6 +46,15 @@ router.post("/", async (req, res) => {
         console.log(`Received data: ${value} Kg. Converted to ${livres} livres..`);
         // Send the converted value in the response
         res.send(`Converted value: ${livres} livres.`);
+    } else if (type.toLowerCase() === "f2c" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from Fahrenheit to Celsius (( °F - 32) * 5/9 = 0 °C)
+        const C = (parseFloat(value) - 32) + 5/9;
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} °F. Converted to ${C} °C.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${C} °C.`);
     } else if (type.toLowerCase() === "c2f" && !isNaN(value)) {
         // log to server console for debugging
         console.log("received data: " + req.body.type + " for " + req.body.value);
@@ -36,27 +64,45 @@ router.post("/", async (req, res) => {
         console.log(`Received data: ${value} °C. Converted to ${F} °F.`);
         // Send the converted value in the response
         res.send(`Converted value: ${F} °F.`);
+    } else if (type.toLowerCase() === "gallon2litre" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from galon to liter (gallon = 0.3,78541 liter)
+        const liter = (parseFloat(value) * 3.78541).toFixed(3);
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} gallons. Converted to ${liter} liters.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${liter} liter.`);
     } else if (type.toLowerCase() === "liter2gallon" && !isNaN(value)) {
-    // log to server console for debugging
-    console.log("received data: " + req.body.type + " for " + req.body.value);
-    // Convert value from liter to galon (liter = 0.264172 gallon)
-    const gallon = (parseFloat(value) * 0.264172).toFixed(3);
-    // Log the received data and the converted value
-    console.log(`Received data: ${value} liters. Converted to ${gallon} gallons.`);
-    // Send the converted value in the response
-    res.send(`Converted value: ${gallon} gallons.`);
-} else if (type.toLowerCase() === "inch2cm" && !isNaN(value)) {
-    // log to server console for debugging
-    console.log("received data: " + req.body.type + " for " + req.body.value);
-    // Convert value from inc to centimeters (1 inc = 2.54 centimeters)
-    const cm = parseFloat(value) * 2.54;
-    // Log the received data and the converted value
-    console.log(`Received data: ${value} inc. Converted to ${cm} centimeters.`);
-    // Send the converted value in the response
-    res.send(`Converted value: ${cm} centimeters.`);
-} else {
-    // If the type is defined or the value is not a valid number, send an e>
-    res.status(400).send("Invalid input.");
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from liter to galon (liter = 0.264172 gallon)
+        const gallon = (parseFloat(value) * 0.264172).toFixed(3);
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} liters. Converted to ${gallon} gallons.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${gallon} gallons.`);
+    } else if (type.toLowerCase() === "cm2inch" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from centimeters to inches (1 centimeters = 0,393701 inches)
+        const inch = parseFloat(value) * 0.393701;
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} centimeters. Converted to ${inch} inches.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${inch} inches.`);
+    } else if (type.toLowerCase() === "inch2cm" && !isNaN(value)) {
+        // log to server console for debugging
+        console.log("received data: " + req.body.type + " for " + req.body.value);
+        // Convert value from inch to centimeters (1 inch = 2.54 centimeters)
+        const cm = parseFloat(value) * 2.54;
+        // Log the received data and the converted value
+        console.log(`Received data: ${value} inches. Converted to ${cm} centimeters.`);
+        // Send the converted value in the response
+        res.send(`Converted value: ${cm} centimeters.`);
+    } else {
+        // If the type is defined or the value is not a valid number, send an e>
+        res.status(400).send("Invalid input.");
     }
   });
 
