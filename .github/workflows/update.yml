@@ -1,0 +1,16 @@
+name: update
+# Fait le mise a jour du code dans la machine virtuel
+on:
+  workflow_dispatch:
+
+jobs:
+  mise_a_jour-machine-virtuel:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Mise a jour de la machine virtuel
+        run: |
+          git pull origin main
