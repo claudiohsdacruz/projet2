@@ -1,9 +1,10 @@
 const express = require("express");
 const { listeners } = require("process");
 const router = express.Router();
+const jornaux = require('/Users/claudiodacruz/Documents/projet2/models/jornaux');
 
 router.get("/", (req, res) => {
-    res.send("Need a POST request plz!");
+    res.send("Need a POST request plz!")
 });
 
 router.post("/", async (req, res) => {
@@ -104,6 +105,28 @@ router.post("/", async (req, res) => {
         // If the type is defined or the value is not a valid number, send an e>
         res.status(400).send("Invalid input.");
     }
+
+    // Saving data in DB
+    async function saveData() {
+
+        try { 
+            const dateRequest = new Date();
+
+            const dataToSave = {
+                IPsource: req.ip,
+                type: type,
+                time: dateRequest,
+            };
+      
+            const newData = await jornaux.create(dataToSave);
+        
+            console.log('data save with succes:', newData);
+        } catch (error) {
+            console.error('Erro:', error);
+        } 
+    }
+    saveData();
+
   });
 
 module.exports = router;
