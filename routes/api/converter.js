@@ -1,7 +1,7 @@
 const express = require("express");
 const { listeners } = require("process");
 const router = express.Router();
-//const jornaux = require('/Users/claudiodacruz/Documents/projet2/models/jornaux');
+
 const jornaux = require('../../models/jornaux');
 
 router.get("/", (req, res) => {
@@ -112,7 +112,7 @@ router.post("/", async (req, res) => {
 
         try { 
             const dateRequest = new Date();
-
+            
             const dataToSave = {
                 IPsource: req.ip,
                 type: type,
