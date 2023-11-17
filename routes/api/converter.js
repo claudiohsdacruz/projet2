@@ -111,13 +111,16 @@ router.post("/", async (req, res) => {
     async function saveData() {
 
         try { 
-            const dateRequest = new Date();
+            // const dateRequest = new Date();
             
-            const dataToSave = {
-                IPsource: req.ip,
-                type: type,
-                time: dateRequest,
+            const dataToSave = { 
+                IPsource : req.ip,
+                type : type,
+                // time : dateRequest,
             };
+            console.log(typeof(req.ip));
+            console.log(typeof(type));
+            // console.log(typeof(dateRequest));
       
             const newData = await jornaux.create(dataToSave);
         

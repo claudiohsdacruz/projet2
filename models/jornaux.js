@@ -6,6 +6,6 @@ const jornauxShemna = new mongoose.Schema({
   time: { type: Date, default: Date.now }
 });
 
-const jornaux = mongoose.model('jornaux', jornauxShemna);
+const jornaux = mongoose.model('Jornaux', jornauxShemna);
 
 module.exports = jornaux;
