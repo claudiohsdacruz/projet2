@@ -1,7 +1,8 @@
 const express = require("express");
 const { listeners } = require("process");
 const router = express.Router();
-const jornaux = require('/Users/claudiodacruz/Documents/projet2/models/jornaux');
+//const jornaux = require('/Users/claudiodacruz/Documents/projet2/models/jornaux');
+const jornaux = require('../../models/jornaux');
 
 router.get("/", (req, res) => {
     res.send("Need a POST request plz!")

@@ -8,4 +8,7 @@ app.get("/", (req, res) => {
     res.send("Home sweet home");
 });
 
-app.listen(80, () => console.log('Server started'));
+const PORT = 3000; // or another port if you changed it
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
